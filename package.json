@@ -1,0 +1,10 @@
+{
+  "name": "tracer",
+  "version": "1.0.0",
+  "main": "js/src/index",
+  "lotus": {
+    "plugins": [
+      "lotus-coffee"
+    ]
+  }
+}
