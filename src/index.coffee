@@ -1,14 +1,16 @@
 
 module.exports = (message, options) ->
 
-  if arguments.length > 0
+  if typeof message is "string"
     message = ">>> " + message + " <<<"
+  else message = "- - - - - - - -"
 
   if arguments.length > 1
-    skip = (options.skip or 0) + 2
-  else skip = 2
+    skip = (options.skip or 0) + 1
+  else skip = 1
 
-  error = null
+  error = Error()
+  error.skip = skip
 
   self = -> [ message, error ]
 
@@ -16,7 +18,5 @@ module.exports = (message, options) ->
     error = Error()
     error.skip = skip
     return
-
-  self.trace()
 
   return self

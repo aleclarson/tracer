@@ -1,14 +1,17 @@
 module.exports = function(message, options) {
   var error, self, skip;
-  if (arguments.length > 0) {
+  if (typeof message === "string") {
     message = ">>> " + message + " <<<";
+  } else {
+    message = "- - - - - - - -";
   }
   if (arguments.length > 1) {
-    skip = (options.skip || 0) + 2;
+    skip = (options.skip || 0) + 1;
   } else {
-    skip = 2;
+    skip = 1;
   }
-  error = null;
+  error = Error();
+  error.skip = skip;
   self = function() {
     return [message, error];
   };
@@ -16,7 +19,6 @@ module.exports = function(message, options) {
     error = Error();
     error.skip = skip;
   };
-  self.trace();
   return self;
 };
 
